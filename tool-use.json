@@ -1,0 +1,40 @@
+{
+  "session_id": "e4d5e095-ac9c-4823-8557-63d1249cfd11",
+  "transcript_path": "/Users/mark.shipps/.claude/projects/-Users-mark-shipps-Projects-Claude-Code-Masterclass/e4d5e095-ac9c-4823-8557-63d1249cfd11.jsonl",
+  "cwd": "/Users/mark.shipps/Projects/Claude-Code-Masterclass",
+  "permission_mode": "acceptEdits",
+  "hook_event_name": "PostToolUse",
+  "tool_name": "Edit",
+  "tool_input": {
+    "file_path": "/Users/mark.shipps/Projects/Claude-Code-Masterclass/app/(public)/page.tsx",
+    "old_string": "        <div>Chaos, delegated.</div>",
+    "new_string": "        <div>Chaos, delegated.</div>\n        <div>混乱、委任済み。</div>",
+    "replace_all": false
+  },
+  "tool_response": {
+    "filePath": "/Users/mark.shipps/Projects/Claude-Code-Masterclass/app/(public)/page.tsx",
+    "oldString": "        <div>Chaos, delegated.</div>",
+    "newString": "        <div>Chaos, delegated.</div>\n        <div>混乱、委任済み。</div>",
+    "originalFile": "// this page should be used only as a splash page to decide where a user should be navigated to\n// when logged in --> to /heists\n// when not logged in --> to /login\n\nimport { Clock8 } from \"lucide-react\"\n\nexport default function Home() {\n  return (\n    <div className=\"center-content\">\n    <div className=\"page-content\">\n    <h1>\n          P<Clock8 className=\"logo\" strokeWidth={2.75} />cket Heist\n      </h1>\n        <div>Chaos, delegated.</div>\n        <p>\n          Welcome to Pocket Heist — the ultimate workplace challenge platform. Assign sneaky missions to your colleagues, complete daring tasks, and climb the leaderboard. Think you have what it takes to pull off the perfect heist?\n  </p>\n      </div>\n    </div>\n  )\n}\n",
+    "structuredPatch": [
+      {
+        "oldStart": 12,
+        "oldLines": 6,
+        "newStart": 12,
+        "newLines": 7,
+        "lines": [
+          "           P<Clock8 className=\"logo\" strokeWidth={2.75} />cket Heist",
+          "       </h1>",
+          "         <div>Chaos, delegated.</div>",
+          "+        <div>混乱、委任済み。</div>",
+          "         <p>",
+          "           Welcome to Pocket Heist — the ultimate workplace challenge platform. Assign sneaky missions to your colleagues, complete daring tasks, and climb the leaderboard. Think you have what it takes to pull off the perfect heist?",
+          "   </p>"
+        ]
+      }
+    ],
+    "userModified": false,
+    "replaceAll": false
+  },
+  "tool_use_id": "toolu_01DARQdJQ37BHsR9hkXhciS2"
+}
