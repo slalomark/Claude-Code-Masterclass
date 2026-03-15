@@ -16,17 +16,20 @@ npx vitest tests/components/Navbar.test.tsx  # Run a single test file
 
 **Next.js 16 App Router** with two route groups that share no layout:
 
-- `app/(public)/` — unauthenticated pages (splash `/`, `/login`, `/signup`, `/preview`). The splash page (`page.tsx`) is intended to redirect to `/heists` when logged in or `/login` when not — auth routing is not yet implemented.
+- `app/(public)/` — unauthenticated pages (splash `/`, `/login`, `/signup`, `/preview`). The splash page is intended to redirect to `/heists` when logged in or `/login` when not — auth routing is not yet implemented.
 - `app/(dashboard)/` — authenticated pages under `/heists`. Layout wraps all dashboard pages with the `Navbar` component.
 
 **Path alias:** `@/` maps to the repo root (e.g. `@/components/Navbar`).
 
-**Styling:** Tailwind CSS v4 with a custom theme defined in `app/globals.css` via `@theme`. Shared utility classes (`.page-content`, `.center-content`, `.form-title`) are also defined there. Component-scoped styles use CSS Modules (e.g. `Navbar.module.css`).
+**Styling:** Tailwind CSS v4 with a custom theme defined in `app/globals.css` via `@theme`. Shared utility classes (`.page-content`, `.center-content`, `.form-title`, `.btn`) are also defined there. Component-scoped styles use CSS Modules (e.g. `Navbar.module.css`), which reference the global theme via `@reference "../../app/globals.css"` and apply utilities with `@apply`.
 
-**Components** live in `components/<ComponentName>/` with an `index.ts` barrel export.
+**Components** live in `components/<ComponentName>/` with an `index.ts` barrel export. Each folder contains: the component file, a CSS Module, and `index.ts`.
 
-**Tests** mirror the component path under `tests/` and use Vitest + Testing Library with jsdom. Vitest globals are enabled — no need to import `describe`/`it`/`expect`.
+**Tests** mirror the component path under `tests/` and use Vitest + Testing Library with jsdom. Vitest globals are enabled — no need to import `describe`/`it`/`expect`. Use `userEvent.setup()` for simulating user interactions.
+
+**Specs and plans** live in `_specs/` and `_plans/` respectively.
 
 ## Rules
 
-When checking out a branch use `git switch -c` syntax.
+- When checking out a branch use `git switch -c` syntax.
+- When implementing and lib/framework-specific features, ALWAYS check the appropriate lib/framework documentation using the Context7 MCP server before writing any code.

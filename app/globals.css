@@ -46,5 +46,5 @@ svg.logo {
 
 /* button */
 .btn {
-  @apply bg-primary text-dark font-semibold px-4 py-2 rounded-lg hover:bg-secondary transition-colors;
+  @apply bg-gradient-to-r from-[#9810fa] to-[#e60076] text-white font-normal text-base tracking-[-0.02em] px-4 py-2 rounded-[10px] transition-opacity hover:opacity-90;
 }
