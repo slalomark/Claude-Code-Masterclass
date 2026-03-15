@@ -15,6 +15,12 @@ vi.mock("@/lib/signup", () => ({
     mockGetSignupErrorMessage(...args),
 }));
 
+const mockLogin = vi.fn();
+vi.mock("@/lib/login", () => ({
+  login: (...args: unknown[]) => mockLogin(...args),
+  getLoginErrorMessage: vi.fn(() => "Login failed. Please try again."),
+}));
+
 describe("AuthForm", () => {
   it("renders email and password fields", () => {
     render(<AuthForm mode="login" />);
@@ -49,28 +55,10 @@ describe("AuthForm", () => {
   });
 
   it("clicking the toggle does not submit the form", async () => {
-    const spy = vi.spyOn(console, "log");
     const user = userEvent.setup();
     render(<AuthForm mode="login" />);
     await user.click(screen.getByRole("button", { name: "Show password" }));
-    expect(spy).not.toHaveBeenCalled();
-    spy.mockRestore();
-  });
-
-  it("submitting the form logs email and password", async () => {
-    const spy = vi.spyOn(console, "log");
-    const user = userEvent.setup();
-    render(<AuthForm mode="login" />);
-
-    await user.type(screen.getByLabelText("Email"), "test@example.com");
-    await user.type(screen.getByLabelText("Password"), "secret123");
-    await user.click(screen.getByRole("button", { name: "Log In" }));
-
-    expect(spy).toHaveBeenCalledWith({
-      email: "test@example.com",
-      password: "secret123",
-    });
-    spy.mockRestore();
+    expect(mockLogin).not.toHaveBeenCalled();
   });
 
   it("login mode renders Log In button and link to signup", () => {

@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 import { signup, getSignupErrorMessage } from "@/lib/signup";
+import { login, getLoginErrorMessage } from "@/lib/login";
 import styles from "./AuthForm.module.css";
 
 type AuthFormProps = {
@@ -16,14 +17,31 @@ export default function AuthForm({ mode }: AuthFormProps) {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    if (!success) return;
+    const timer = setTimeout(() => setSuccess(null), 3000);
+    return () => clearTimeout(timer);
+  }, [success]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (mode === "login") {
-      console.log({ email, password });
+      setError(null);
+      setSuccess(null);
+      setLoading(true);
+      try {
+        await login(email, password);
+        setSuccess("Login successful!");
+      } catch (err) {
+        setError(getLoginErrorMessage(err));
+      } finally {
+        setLoading(false);
+      }
       return;
     }
 
@@ -44,6 +62,12 @@ export default function AuthForm({ mode }: AuthFormProps) {
       {error && (
         <p role="alert" className={styles.error}>
           {error}
+        </p>
+      )}
+
+      {success && (
+        <p role="status" className={styles.success}>
+          {success}
         </p>
       )}
 
@@ -84,7 +108,13 @@ export default function AuthForm({ mode }: AuthFormProps) {
       </div>
 
       <button type="submit" className="btn" disabled={loading}>
-        {loading ? "Signing up..." : mode === "login" ? "Log In" : "Sign Up"}
+        {loading
+          ? mode === "login"
+            ? "Logging in..."
+            : "Signing up..."
+          : mode === "login"
+            ? "Log In"
+            : "Sign Up"}
       </button>
 
       <p className={styles.switchLink}>
