@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
+import { signup, getSignupErrorMessage } from "@/lib/signup";
 import styles from "./AuthForm.module.css";
 
 type AuthFormProps = {
@@ -13,14 +15,38 @@ export default function AuthForm({ mode }: AuthFormProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log({ email, password });
+
+    if (mode === "login") {
+      console.log({ email, password });
+      return;
+    }
+
+    setError(null);
+    setLoading(true);
+    try {
+      await signup(email, password);
+      router.push("/heists");
+    } catch (err) {
+      setError(getSignupErrorMessage(err));
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
+      {error && (
+        <p role="alert" className={styles.error}>
+          {error}
+        </p>
+      )}
+
       <label className={styles.label} htmlFor="email">
         Email
       </label>
@@ -29,6 +55,7 @@ export default function AuthForm({ mode }: AuthFormProps) {
         id="email"
         type="email"
         required
+        disabled={loading}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
@@ -42,6 +69,7 @@ export default function AuthForm({ mode }: AuthFormProps) {
           id="password"
           type={showPassword ? "text" : "password"}
           required
+          disabled={loading}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -55,8 +83,8 @@ export default function AuthForm({ mode }: AuthFormProps) {
         </button>
       </div>
 
-      <button type="submit" className="btn">
-        {mode === "login" ? "Log In" : "Sign Up"}
+      <button type="submit" className="btn" disabled={loading}>
+        {loading ? "Signing up..." : mode === "login" ? "Log In" : "Sign Up"}
       </button>
 
       <p className={styles.switchLink}>
