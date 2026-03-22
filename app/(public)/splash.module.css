@@ -1,0 +1,184 @@
+@reference "../globals.css";
+
+/* ── atmosphere ── */
+.scene {
+  @apply relative min-h-lvh flex flex-col items-center overflow-hidden;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(194, 122, 255, 0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 35% at 70% 10%, rgba(251, 100, 182, 0.06) 0%, transparent 60%),
+    var(--color-dark);
+}
+
+/* subtle scanline overlay */
+.scene::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.008) 2px,
+    rgba(255, 255, 255, 0.008) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* floating grid lines for depth */
+.scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(194, 122, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(194, 122, 255, 0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black, transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── hero ── */
+.hero {
+  @apply relative z-10 flex flex-col items-center pt-28 pb-16 px-6;
+}
+
+/* glowing orb behind the logo */
+.glow {
+  position: absolute;
+  top: 60px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(194, 122, 255, 0.15) 0%, rgba(251, 100, 182, 0.08) 40%, transparent 70%);
+  filter: blur(60px);
+  animation: pulse 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+.logoMark {
+  @apply relative mb-6;
+  animation: fadeDown 0.8s ease-out both;
+}
+
+.logoIcon {
+  width: 64px;
+  height: 64px;
+  color: var(--color-primary);
+  filter: drop-shadow(0 0 20px rgba(194, 122, 255, 0.4));
+}
+
+.title {
+  @apply text-6xl font-extrabold tracking-tight text-center leading-none mb-2;
+  background: linear-gradient(135deg, #fff 0%, #C27AFF 50%, #FB64B6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeDown 0.8s ease-out 0.1s both;
+}
+
+.tagline {
+  @apply text-lg tracking-widest uppercase text-body mb-2;
+  letter-spacing: 0.25em;
+  animation: fadeDown 0.8s ease-out 0.2s both;
+}
+
+.taglineJp {
+  @apply text-sm text-body/50 mb-8;
+  animation: fadeDown 0.8s ease-out 0.25s both;
+}
+
+.description {
+  @apply text-body text-center max-w-md text-base leading-relaxed mb-10;
+  animation: fadeDown 0.8s ease-out 0.3s both;
+}
+
+/* ── CTA ── */
+.cta {
+  @apply flex flex-col items-center gap-3;
+  animation: fadeDown 0.8s ease-out 0.4s both;
+}
+
+.registerBtn {
+  @apply relative text-white font-semibold text-lg px-10 py-3.5 rounded-xl transition-all;
+  background: linear-gradient(135deg, #9810fa 0%, #e60076 100%);
+  box-shadow:
+    0 0 20px rgba(152, 16, 250, 0.3),
+    0 0 60px rgba(230, 0, 118, 0.15);
+}
+
+.registerBtn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 30px rgba(152, 16, 250, 0.5),
+    0 0 80px rgba(230, 0, 118, 0.25);
+}
+
+.loginLink {
+  @apply text-sm text-body/60 transition-colors;
+}
+.loginLink:hover {
+  color: var(--color-primary);
+}
+
+/* ── features ── */
+.features {
+  @apply relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl w-full px-6 pb-20;
+}
+
+.card {
+  @apply relative rounded-2xl p-6 transition-all;
+  background: rgba(16, 24, 40, 0.6);
+  border: 1px solid rgba(194, 122, 255, 0.08);
+  backdrop-filter: blur(8px);
+}
+.card:hover {
+  border-color: rgba(194, 122, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card:nth-child(1) { animation: fadeUp 0.6s ease-out 0.5s both; }
+.card:nth-child(2) { animation: fadeUp 0.6s ease-out 0.6s both; }
+.card:nth-child(3) { animation: fadeUp 0.6s ease-out 0.7s both; }
+
+.cardIcon {
+  @apply mb-3;
+  color: var(--color-primary);
+  filter: drop-shadow(0 0 8px rgba(194, 122, 255, 0.3));
+}
+
+.cardTitle {
+  @apply text-sm font-semibold text-heading mb-1.5 uppercase tracking-wider;
+}
+
+.cardDesc {
+  @apply text-sm text-body leading-relaxed;
+}
+
+/* ── footer ── */
+.footer {
+  @apply relative z-10 pb-8 text-center;
+  animation: fadeUp 0.6s ease-out 0.8s both;
+}
+
+.footerText {
+  @apply text-xs text-body/30 uppercase tracking-widest;
+}
+
+/* ── keyframes ── */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
