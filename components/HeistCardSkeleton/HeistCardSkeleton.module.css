@@ -1,0 +1,38 @@
+@reference "../../app/globals.css";
+
+.skeleton {
+  @apply flex flex-col gap-3 px-5 pt-5 pb-0 rounded-[10px] bg-lighter w-full;
+  border: 0.8px solid #1e2939;
+  min-height: 178px;
+}
+
+.header {
+  @apply flex justify-between items-start;
+}
+
+.meta {
+  @apply flex flex-col gap-2;
+}
+
+.bar {
+  @apply rounded;
+  background-color: #1e2939;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.barTitle {
+  @apply h-5 w-3/4;
+}
+
+.barIcon {
+  @apply h-4 w-4 rounded-full;
+}
+
+.barMeta {
+  @apply h-4 w-1/2;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}

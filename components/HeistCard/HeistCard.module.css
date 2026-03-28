@@ -1,0 +1,47 @@
+@reference "../../app/globals.css";
+
+.card {
+  @apply flex flex-col gap-3 px-5 pt-5 pb-0 rounded-[10px] bg-lighter w-full;
+  border: 0.8px solid #1e2939;
+  min-height: 178px;
+}
+
+.header {
+  @apply flex justify-between items-start;
+}
+
+.title {
+  @apply text-base leading-6 tracking-[-0.02em] text-heading font-normal no-underline;
+}
+
+.title:hover {
+  @apply underline;
+}
+
+.clockIcon {
+  @apply text-primary flex-shrink-0;
+}
+
+.meta {
+  @apply flex flex-col gap-2;
+}
+
+.metaRow {
+  @apply flex items-center gap-2 text-sm leading-5;
+}
+
+.metaIcon {
+  @apply text-body;
+}
+
+.metaLabel {
+  @apply text-body;
+}
+
+.toValue {
+  @apply text-primary;
+}
+
+.byValue {
+  @apply text-secondary;
+}
