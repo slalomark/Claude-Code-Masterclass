@@ -1,0 +1,65 @@
+@reference "../../app/globals.css";
+
+.card {
+  @apply flex flex-col gap-2 px-5 py-4 rounded-[10px] w-full;
+  background: rgba(16, 24, 40, 0.3);
+  border: 0.8px solid rgba(30, 41, 57, 0.3);
+}
+
+.header {
+  @apply flex justify-between items-center;
+}
+
+.headerLeft {
+  @apply flex items-center gap-2;
+}
+
+.headerRight {
+  @apply flex items-center gap-2;
+}
+
+.failIcon {
+  @apply text-error flex-shrink-0;
+}
+
+.title {
+  @apply text-base font-medium leading-6 text-heading;
+  letter-spacing: -0.3125px;
+}
+
+.dateLabel {
+  @apply text-body text-sm;
+}
+
+.badge {
+  @apply text-error uppercase text-xs;
+  background: rgba(255, 100, 103, 0.05);
+  border: 0.833px solid rgba(255, 100, 103, 0.2);
+  border-radius: 4px;
+  padding: 2px 8px;
+  letter-spacing: 0.6px;
+}
+
+.meta {
+  @apply flex items-center gap-4;
+}
+
+.metaRow {
+  @apply flex items-center gap-2 text-sm leading-5;
+}
+
+.metaIcon {
+  @apply text-body;
+}
+
+.metaLabel {
+  @apply text-body;
+}
+
+.toValue {
+  @apply text-primary;
+}
+
+.byValue {
+  @apply text-secondary;
+}

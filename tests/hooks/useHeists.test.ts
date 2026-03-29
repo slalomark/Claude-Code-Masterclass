@@ -115,7 +115,7 @@ describe("useHeists", () => {
     expect(result.current.loading).toBe(false);
   });
 
-  it("filters out null finalStatus for expired filter", () => {
+  it("filters to only null finalStatus for expired filter", () => {
     mockOnSnapshot.mockImplementation(
       (q: unknown, onNext: (snapshot: unknown) => void) => {
         onNext({
@@ -144,8 +144,7 @@ describe("useHeists", () => {
     const { result } = renderHook(() => useHeists("expired"));
 
     expect(result.current.heists).toEqual([
-      { id: "h2", title: "Heist 2", finalStatus: "success" },
-      { id: "h3", title: "Heist 3", finalStatus: "failure" },
+      { id: "h1", title: "Heist 1", finalStatus: null },
     ]);
   });
 

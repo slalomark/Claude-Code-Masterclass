@@ -61,7 +61,7 @@ export function useHeists(filter: HeistFilter): UseHeistsResult {
         let results = snapshot.docs.map((doc) => doc.data() as Heist);
 
         if (filter === "expired") {
-          results = results.filter((heist) => heist.finalStatus !== null);
+          results = results.filter((heist) => heist.finalStatus === null);
         }
 
         setHeists(results);
